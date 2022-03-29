@@ -4,13 +4,13 @@ import { RowMapper } from '../utils';
 import { Pair } from '../utils/utils';
 
 export class PGClient implements IDBClient {
-    host: string;
-    userName: string;
-    password: string;
-    minPoolSize: number;
-    port: number;
+    private host: string;
+    private userName: string;
+    private password: string;
+    private minPoolSize: number;
+    private port: number;
 
-    pool: Pool
+    private pool: Pool
 
     // fix: dont use default values
     constructor(
