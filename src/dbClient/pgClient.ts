@@ -68,6 +68,20 @@ export class PGClient implements IDBClient {
         return mapResult
         
     }
+
+    async fetch<R>(query: string, obj: R): Promise<R> {
+        return this.fetchAll<R>(query, obj)
+            .then((res: R[]) => {
+                if (res.length == 0) {
+                    return obj
+                } else {
+                    return res[0]
+                }
+            })
+            .catch((err) => {
+                return obj
+            })
+    }
     
     async fetchAllUsingField<R>(query: string, field: string): Promise<R[]> {
         const result = await this.pool.query(query)
