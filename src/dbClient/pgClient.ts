@@ -33,6 +33,20 @@ export class PGClient implements IDBClient {
             database: 'postgres',
         });
     }
+    private mapData<R>(classObj: R, row: any): R {
+        const classProperties = Object.getOwnPropertyNames(classObj)
+        const rowProperties = Object.getOwnPropertyNames(row)
+        // map row property to classObject
+        for (const rowProperty of rowProperties) {
+            const mappedClassProperty = classProperties.find((property: string) => {
+                return property == rowProperty
+            })
+            if (mappedClassProperty != undefined) {
+                classObj[mappedClassProperty as keyof R] = row[rowProperty]
+            }
+        }
+        return classObj
+    }
     async fetchAllUsingTwoFields<R, T>(query: string, field1: string, field2: string): Promise<Pair<R, T>[]> {
         const result = await this.pool.query(query)
         const mapResult = await result.rows.map((row: any) => {
