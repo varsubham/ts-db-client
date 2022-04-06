@@ -43,11 +43,12 @@ export class PGClient implements IDBClient {
         return mapResult
     }
 
-
-    async fetchAll<R>(query: string, rowMapper: RowMapper<R>): Promise<R[]> {
+    async fetchAll<R>(query: string, obj: R): Promise<R[]> {
         const result = await this.pool.query(query)
-        const mapResult =  await result.rows.map((row: any) => {
-            return rowMapper.mapRow(row)
+        const mapResult = await result.rows.map((row) => {         
+            let newObj = {...obj}
+            return this.mapData(newObj, row)
+
         })
         this.pool.end()
         return mapResult
