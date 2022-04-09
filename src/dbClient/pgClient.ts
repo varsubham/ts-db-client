@@ -4,11 +4,6 @@ import { RowMapper } from '../utils';
 import { Pair } from '../utils/utils';
 
 export class PGClient implements IDBClient {
-    private host: string;
-    private userName: string;
-    private password: string;
-    private minPoolSize: number;
-    private port: number;
 
     private pool: Pool
 
@@ -20,11 +15,6 @@ export class PGClient implements IDBClient {
         port: number,
         database: string
     ) {
-        this.host = host
-        this.userName = userName
-        this.password = password
-        this.minPoolSize = minPoolSize
-        this.port = port
         this.pool = new Pool({
             host: host,
             port: port,
