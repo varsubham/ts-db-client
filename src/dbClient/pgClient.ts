@@ -46,8 +46,8 @@ export class PGClient implements IDBClient {
         }
         return classObj
     }
-    async fetchAllUsingTwoFields<R, T>(query: string, field1: string, field2: string): Promise<Pair<R, T>[]> {
-        const result = await this.pool.query(query)
+    async fetchAllUsingTwoFields<R, T>(query: string, field1: string, field2: string, parameters: any[] = new Array<any>()): Promise<Pair<R, T>[]> {
+        const result = await this.pool.query(query, parameters)
         const mapResult = await result.rows.map((row: any) => {
             const keyPair: Pair<R, T> = {key: row[field1], value: row[field2]}
             return keyPair
@@ -56,8 +56,8 @@ export class PGClient implements IDBClient {
         return mapResult
     }
 
-    async fetchAll<R>(query: string, obj: R): Promise<R[]> {
-        const result = await this.pool.query(query)
+    async fetchAll<R>(query: string, obj: R, parameters: any[] = new Array<any>()): Promise<R[]> {
+        const result = await this.pool.query(query, parameters)
         const mapResult = await result.rows.map((row) => {         
             let newObj = {...obj}
             return this.mapData(newObj, row)
@@ -68,8 +68,8 @@ export class PGClient implements IDBClient {
         
     }
 
-    async fetch<R>(query: string, obj: R): Promise<R> {
-        return this.fetchAll<R>(query, obj)
+    async fetch<R>(query: string, obj: R, parameters: any[] = new Array<any>()): Promise<R> {
+        return this.fetchAll<R>(query, obj, parameters)
             .then((res: R[]) => {
                 if (res.length == 0) {
                     return obj
@@ -83,8 +83,8 @@ export class PGClient implements IDBClient {
             })
     }
     
-    async fetchAllUsingField<R>(query: string, field: string): Promise<R[]> {
-        const result = await this.pool.query(query)
+    async fetchAllUsingField<R>(query: string, field: string, parameters: any[] = new Array<any>()): Promise<R[]> {
+        const result = await this.pool.query(query, parameters)
         const mapResult = await result.rows.map((map: any) => {
             return map[field] as R
         })
