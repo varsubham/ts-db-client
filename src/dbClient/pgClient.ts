@@ -17,8 +17,8 @@ export class PGClient implements IDBClient {
         host: string,
         userName: string,
         password: string,
-        minPoolSize: number,
-        port: number
+        port: number,
+        database: string
     ) {
         this.host = host
         this.userName = userName
@@ -26,12 +26,21 @@ export class PGClient implements IDBClient {
         this.minPoolSize = minPoolSize
         this.port = port
         this.pool = new Pool({
-            host: 'localhost',
-            port: 5432,
-            user: 'postgres',
-            password: 'admin',
-            database: 'postgres',
+            host: host,
+            port: port,
+            user: userName,
+            password: password,
+            database: database,
         });
+    }
+    static defaultConfig(): PGClient {
+        return new PGClient(
+            'localhost',
+            'postgres',
+            'admin',
+            5432,
+            'postgres'
+        )
     }
     private mapData<R>(classObj: R, row: any): R {
         const classProperties = Object.getOwnPropertyNames(classObj)
@@ -79,6 +88,7 @@ export class PGClient implements IDBClient {
                 }
             })
             .catch((err) => {
+                console.log(err)
                 return obj
             })
     }
