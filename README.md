@@ -60,7 +60,7 @@ class User {
 
 // fetchAll will return multiple rows
 // The data will be mapped to User DTO as User[]
-pgClient.fetchAll<User>('SELECT * FROM users WHERE id = $1', new User(), [2])
+pgClient.fetchAll<User>('SELECT * FROM users', new User())
     .then((res) => {
         console.log(res)
     })
@@ -85,7 +85,7 @@ class User {
 // fetchAllUsingField will return multiple fields
 // but we can query using a fieldName.
 // Below we are returning data using 'handle'
-pgClient.fetchAllUsingField<number>('select handle from users', "handle")
+pgClient.fetchAllUsingField<string>('select handle from users', "handle")
     .then((res: number[]) => {
         console.log(res)
     })
@@ -109,8 +109,8 @@ class User {
 
 // fetchAll will return multiple rows
 // The data will be mapped to User DTO as User[]
-pgClient.fetchAllUsingField<number>('select handle from users', "handle")
-    .then((res: number[]) => {
+pgClient.fetchAllUsingTwoFields<number, string>('select id, handle from users', "id", "handle")
+    .then((res) => {
         console.log(res)
     })
     .catch((err) => {
