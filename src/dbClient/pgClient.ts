@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import { IDBClient } from '../interface/pgInterface';
-import { RowMapper } from '../utils';
 import { Pair } from '../utils/utils';
 
 export class PGClient implements IDBClient {

@@ -1,1 +1,1 @@
-export { Pair, RowMapper } from './utils'
+export { Pair } from './utils'

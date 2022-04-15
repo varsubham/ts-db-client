@@ -1,5 +1,4 @@
 import { Pair } from '../utils/utils';
-import { RowMapper } from '../utils';
 
 export interface IDBClient {
     // fetch multiple rows
