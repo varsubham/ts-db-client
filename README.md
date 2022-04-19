@@ -1,5 +1,7 @@
 # ts-db-client
 
+Simple Wrapper Library over DB clients. Currently Supports PostgreSQL, MYSQL(WIP). Other DBMS support coming soon.
+
 ## Installing
 
 Using npm:
