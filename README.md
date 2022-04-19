@@ -1,5 +1,10 @@
 # ts-db-client
 
+[![npm version](https://img.shields.io/npm/v/ts-db-client.svg?style=flat-square)](https://www.npmjs.com/package/ts-db-client)
+[![CDNJS](https://img.shields.io/cdnjs/v/ts-db-client.svg?style=flat-square)](https://cdnjs.com/libraries/ts-db-client)
+[![install size](https://packagephobia.now.sh/badge?p=ts-db-client)](https://packagephobia.now.sh/result?p=ts-db-client)
+[![npm downloads](https://img.shields.io/npm/dm/ts-db-client.svg?style=flat-square)](http://npm-stat.com/charts.html?package=ts-db-client)
+
 Simple Wrapper Library over DB clients. Currently Supports PostgreSQL, MYSQL(WIP). Other DBMS support coming soon.
 
 ## Installing
