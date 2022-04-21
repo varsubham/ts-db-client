@@ -73,8 +73,21 @@ export class MYSQLClient implements IDBClient {
             })
         })
     }
-    fetchAllUsingField<R>(query: string, field: string, parameters: any[]): Promise<R[]> {
-        throw new Error('Method not implemented.');
+    fetchAllUsingField<R>(query: string, field: string, parameters: any[] = new Array<any>()): Promise<R[]> {
+        return new Promise((resolve, reject) => {
+            this.pool.execute(query, parameters, (error, result) => {
+                if (error) {
+                    console.error(error)
+                    return reject([])
+                }
+                const queryRows = <RowDataPacket[]> result
+                const mapResult = queryRows.map((row: RowDataPacket) => {
+                    return row[field] as R
+                })
+                this.pool.end()
+                return resolve(mapResult)
+            })
+        })
     }
     fetchAllUsingTwoFields<R, T>(query: string, field1: string, field2: string, parameters: any[]): Promise<Pair<R, T>[]> {
         throw new Error('Method not implemented.');
