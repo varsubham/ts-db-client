@@ -56,7 +56,7 @@ export class MYSQLClient implements IDBClient {
         return classObj
     }
     
-    async fetchAll<R>(query: string, obj: R, parameters: any[] = new Array<any>()): Promise<R[]> {
+    fetchAll<R>(query: string, obj: R, parameters: any[] = new Array<any>()): Promise<R[]> {
         return new Promise((resolve, reject) => {
             this.pool.execute(query, parameters, (error, result) => {
                 if (error) {
@@ -73,6 +73,7 @@ export class MYSQLClient implements IDBClient {
             })
         })
     }
+
     fetchAllUsingField<R>(query: string, field: string, parameters: any[] = new Array<any>()): Promise<R[]> {
         return new Promise((resolve, reject) => {
             this.pool.execute(query, parameters, (error, result) => {
@@ -89,9 +90,11 @@ export class MYSQLClient implements IDBClient {
             })
         })
     }
+
     fetchAllUsingTwoFields<R, T>(query: string, field1: string, field2: string, parameters: any[]): Promise<Pair<R, T>[]> {
         throw new Error('Method not implemented.');
     }
+
     fetch<R>(query: string, obj: R, parameters: any[]): Promise<R> {
         throw new Error('Method not implemented.');
     }
