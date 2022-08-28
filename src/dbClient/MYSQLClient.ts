@@ -68,6 +68,7 @@ export class MYSQLClient implements IDBClient {
                     const newObj = {...obj}
                     return this.mapData(newObj, row)
                 })
+                this.pool.end()
                 return resolve(mapResult)
 
             })
