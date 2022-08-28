@@ -110,8 +110,22 @@ export class MYSQLClient implements IDBClient {
         })
     }
 
-    fetch<R>(query: string, obj: R, parameters: any[]): Promise<R> {
-        throw new Error('Method not implemented.');
+    fetch<R>(query: string, obj: R, parameters: any[] = new Array<any>()): Promise<R> {
+        return new Promise((resolve, reject) => {
+            this.fetchAll<R>(query, obj, parameters)
+                .then((res: R[]) => {
+                    if (res.length == 0) {
+                        return resolve(obj)
+                    } else {
+                        return resolve(res[0])
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                    return reject(obj)
+                })
+            }
+        )
     }
 
 }
