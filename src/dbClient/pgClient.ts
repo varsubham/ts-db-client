@@ -10,7 +10,7 @@ export class PGClient implements IDBClient {
     constructor(
         host: string,
         userName: string,
-        password: string,
+        password: string | undefined = undefined,
         port: number,
         database: string
     ) {
