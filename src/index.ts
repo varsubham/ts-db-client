@@ -1,2 +1,2 @@
 export { Pair } from './utils/utils'
-export { PGClient } from './dbClient'
+export { PGClient, MYSQLClient } from './dbClient'

@@ -1,6 +1,6 @@
 import * as mysql from 'mysql2'
 import { Pool } from 'mysql2'
-import { OkPacket, RowDataPacket } from "mysql2";
+import { RowDataPacket } from "mysql2";
 import { IDBClient } from '../interface/pgInterface';
 import { Pair } from '../utils';
 
