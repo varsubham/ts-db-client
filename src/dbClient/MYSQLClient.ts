@@ -36,7 +36,7 @@ export class MYSQLClient implements IDBClient {
           console.error(error);
           return reject([]);
         }
-        this.pool.end();
+        // this.pool.end();
         return resolve(result);
       });
     });
@@ -77,7 +77,7 @@ export class MYSQLClient implements IDBClient {
           const newObj = { ...obj };
           return this.mapData(newObj, row);
         });
-        this.pool.end();
+        // this.pool.end();
         return resolve(mapResult);
       });
     });
@@ -98,7 +98,7 @@ export class MYSQLClient implements IDBClient {
         const mapResult = queryRows.map((row: RowDataPacket) => {
           return row[field] as R;
         });
-        this.pool.end();
+        // this.pool.end();
         return resolve(mapResult);
       });
     });
@@ -121,7 +121,7 @@ export class MYSQLClient implements IDBClient {
           const keyPair: Pair<R, T> = { key: row[field1], value: row[field2] };
           return keyPair;
         });
-        this.pool.end();
+        // this.pool.end();
         return resolve(mapResult);
       });
     });

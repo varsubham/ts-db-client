@@ -49,7 +49,7 @@ export class PGClient implements IDBClient {
       const keyPair: Pair<R, T> = { key: row[field1], value: row[field2] };
       return keyPair;
     });
-    this.pool.end();
+    // this.pool.end();
     return mapResult;
   }
 
@@ -63,7 +63,7 @@ export class PGClient implements IDBClient {
       let newObj = { ...obj };
       return this.mapData(newObj, row);
     });
-    this.pool.end();
+    // this.pool.end();
     return mapResult;
   }
 
@@ -95,7 +95,7 @@ export class PGClient implements IDBClient {
     const mapResult = await result.rows.map((map: any) => {
       return map[field] as R;
     });
-    this.pool.end();
+    // this.pool.end();
     return mapResult;
   }
 
@@ -104,7 +104,7 @@ export class PGClient implements IDBClient {
     parameters: any[] = new Array<any>()
   ): Promise<any> {
     const result = this.pool.query(query, parameters);
-    this.pool.end();
+    // this.pool.end();
     return result;
   }
 }
