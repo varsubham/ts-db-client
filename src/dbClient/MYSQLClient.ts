@@ -16,7 +16,8 @@ export class MYSQLClient implements IDBClient {
     port: number = 3306,
     waitForConnections: boolean = true,
     connectionLimit: number = 10,
-    queueLimit: number = 0
+    queueLimit: number = 0,
+    rejectUnauthorized: boolean = true
   ) {
     this.pool = mysql.createPool({
       host: host,
@@ -27,6 +28,9 @@ export class MYSQLClient implements IDBClient {
       waitForConnections: waitForConnections,
       connectionLimit: connectionLimit,
       queueLimit: queueLimit,
+      ssl: {
+        rejectUnauthorized: rejectUnauthorized,
+      },
     });
   }
   updateRow(query: string, parameters: any[]): Promise<any> {

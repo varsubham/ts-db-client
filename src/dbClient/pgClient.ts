@@ -11,7 +11,8 @@ export class PGClient implements IDBClient {
     userName: string,
     password: string | undefined = undefined,
     port: number,
-    database: string
+    database: string,
+    rejectUnauthorized: boolean = true
   ) {
     this.pool = new Pool({
       host: host,
@@ -19,10 +20,20 @@ export class PGClient implements IDBClient {
       user: userName,
       password: password,
       database: database,
+      ssl: {
+        rejectUnauthorized: rejectUnauthorized,
+      },
     });
   }
   static defaultConfig(): PGClient {
-    return new PGClient("localhost", "postgres", "admin", 5432, "postgres");
+    return new PGClient(
+      "localhost",
+      "postgres",
+      "admin",
+      5432,
+      "postgres",
+      false
+    );
   }
   private mapData<R>(classObj: R, row: any): R {
     const classProperties = Object.getOwnPropertyNames(classObj);
